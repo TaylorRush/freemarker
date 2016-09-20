@@ -1,0 +1,135 @@
+.data-content{
+    background-color: #FFFFFF;
+}
+
+.data-section{
+    padding: 10px;
+    /*background-color: red;*/
+}
+
+.data-section-title{
+    font-size: 30px;
+     font-family: "bebas-neue", Arial, sans-serif;
+}
+
+#edit-campaign-page .input-group-btn .btn{
+    font-size: 21px;
+    padding: 1px 38px;
+}
+
+#creatives-list{
+    background-color: #EEEEEE;
+}
+#creatives-list .type-name{
+   height: 50px;
+}
+
+#creatives-list .type-name{
+    font-size: 28px;
+    line-height: 28px;
+     font-family: "bebas-neue", Arial, sans-serif;
+}
+
+
+.tagSection{
+    
+}
+.tagSection ul{
+    background-color: #eeeeee;
+    height: 100px;
+    border: 1px solid #ddd;;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+    margin: 0;
+    padding: 10px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.tagSection ul li{
+    list-style: none;
+}
+
+
+.twphnx{
+    height: 76px;
+}
+
+.twphnx .btn{
+    width: 120px;
+    margin: 0 10px;
+}
+
+select.form-control {
+    font-size: 15px;
+    background-size: 100% 100%;
+    height: 25px;
+    width: 176px;
+ /*  
+    border: none;
+    background: url(../images/dropdown.png) 0 0 no-repeat;
+    -webkit-appearance: none;
+    appearance: none;
+    -moz-appearance: none;
+    color: #333333;
+    box-shadow: none;
+    background-color: #ffffff;*/
+}
+
+#edit-campaign-page .checkBoxFill > input[type="checkbox"] + label::before {
+    background: rgba(0, 0, 0, 0) url("../images/checkboxs.png") no-repeat scroll 0 0;
+    background-size: 18px 36px;
+    color: #fff;
+    content: " ";
+    height: 18px;
+    left: 8px;
+    margin: -4px 0 0 0px;
+    overflow: hidden;
+    pointer-events: none;
+    position: absolute;
+    width: 18px;
+    z-index: 2;
+}
+
+
+#edit-campaign-page .checkBoxFill > input[type="checkbox"]:checked + label::before {
+    background-position: 0 -18px;
+}
+
+
+#edit-campaign-page .checkBoxFill label {
+    font-size: 15px;
+    color: #000000;
+    font-weight: 700;
+    height: 25px;
+}
+
+/*#edit-campaign-page .vertical-center-parent{
+    height: 50px;
+}*/
+
+#edit-campaign-page  .checkBoxFill {
+   padding-top:15px;
+}
+
+
+
+
+@media (min-width: 768px) {
+   
+}
+
+
+/* Medium devices (desktops, 992px and up) */
+
+@media (min-width: 992px) {
+    select.form-control {
+    width: 222px;
+    }
+}
+
+
+/* Large devices (large desktops, 1200px and up) */
+
+@media (min-width: 1200px) {
+    
+}

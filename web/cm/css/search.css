@@ -1,0 +1,490 @@
+
+
+.scrollable{
+    overflow-y: scroll;
+    overflow-x: hidden;
+    height: 400px;
+     margin:0; 
+  padding:0; 
+}
+
+.menu_holder .vertical-center-parent {
+    margin: 20px 0;
+}
+
+
+.search-container {
+    background-color: #e1ebf4;
+    padding: 40px 0;
+}
+
+.blue-icon.input-group-addon {
+    background-color: #0abab5;
+    color: #FFFFFF;
+}
+
+
+
+/*.baseBG {
+    background-image: url("../images/bg-repeat.png");
+    background-color: #262e3b;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+}*/
+
+
+
+.icons-container {
+    background-color: #a0aab2;
+    padding: 0;
+    margin: 0;
+}
+
+.status-bar {
+    padding: 0;
+}
+
+.status-bar .row {
+    margin: 0;
+}
+
+.status-item {
+    height: 50px;
+}
+
+.sub-menu-icon {
+    background-image: url("../images/sub_menu_btn.png");
+}
+
+.permision-icon,
+.portfolio-icon {
+    border-right: 2px solid #64717c;
+    border-left: 2px solid #64717c;
+}
+
+.permision-icon {
+    background-image: url("../images/permision_btn.png");
+}
+
+.portfolio-icon {
+    background-image: url("../images/portfolio_btn.png");
+    border-right: none;
+}
+
+.expand-item {
+    background-image: url("../images/expand_item.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 42px;
+    height: 42px;
+}
+
+.campaign-info {
+    color: #333333;
+    padding: 0 0 0 5px;
+}
+
+.campaign-name {
+    font-weight: bold;
+    padding-top: 5px;
+    font-size: 14px;
+}
+
+.campaign_tags_block {
+    height: 50px;
+    padding-left: 20px;
+}
+
+.campaign_tags {
+    font-size: 12px;
+}
+
+.tag-name {
+    font-style: italic;
+    font-weight: lighter;
+}
+
+.filterBox {
+    background-color: #cccccc;
+}
+
+
+
+/*.short-count {
+    display: table-cell;
+}*/
+
+
+
+.client_names {
+    text-transform: uppercase;
+    color: #2c3441;
+    font-size: 20px;
+    height: 42px;
+    font-family: "bebas-neue", Arial, sans-serif;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    -ms-hyphens: auto;
+    -moz-hyphens: auto;
+    -webkit-hyphens: auto;
+    hyphens: auto;
+    width: 80%;
+    padding-left: 10px;
+}
+
+.campaign-box {
+    background-color: #f9fbfd;
+    margin-bottom: 2px;
+    /*margin-top: 2px;*/
+}
+
+#search-view .campaign-blocks.panel {
+    background-color: #e0ebf4;
+}
+
+#search-view .panel-default {
+    border: none;
+}
+
+#search-view .panel-default > .panel-heading {
+    background-color: #FFFFFF;
+    padding: 0 15px;
+}
+
+#search-view .panel-group .panel + .panel {
+    margin-top: 8px;
+    box-shadow: none;
+}
+
+
+#search-view .panel-body {
+    padding: 0;
+}
+
+#search-view .sales_view,
+#search-view .portfolio_view {
+    height: 50px;
+    border-right: 2px solid #e0ebf4;
+    border-left: 2px solid #e0ebf4;
+}
+
+
+
+.campaign-date {
+    height: 50px;
+    font-size: 13px;
+}
+
+.share_on {
+    background-image: url("../images/share_on.png");
+}
+
+.share_off {
+    background-image: url("../images/share_off.png");
+}
+
+
+.view-edit{
+    height: 50px;
+}
+.view-edit .btn.sale-view-btn{
+    padding: 5px 45px;
+}
+
+
+/*.view-edit {
+    height: 50px;
+}*/
+
+#search-view .btn{
+     padding: 5px 25px;
+}
+
+.view-edit .btn {
+    margin: 0 10px;
+}
+
+/*.collapse.am-collapse {
+    animation-duration: 1s;
+    animation-timing-function: ease;
+    animation-fill-mode: backwards;
+    overflow: hidden;
+}*/
+
+
+/*.collapse.am-collapse.in-remove {
+    animation-name: collapse;
+    display: block;
+  }
+.collapse.am-collapse.in-add {
+    animation-name: expand;
+  }*/
+
+
+/* The side navigation menu */
+
+#sidenav {
+    height: 100%;
+    position: fixed;
+    z-index: 100;
+    top: 0;
+    left: 0;
+    background-color: rgb(31, 37, 46);
+    background-color: rgba(31, 37, 46, .95);
+    overflow-x: hidden;
+}
+
+#sidenav .form-group {
+    margin-bottom: 5px;
+}
+
+#sidenav .form-control {
+    font-size: 12px;
+    width: 222px;
+    height: 21px;
+    padding: 1px 10px 1px 5px;
+    border: none;
+    background: url(../images/dropdown.png) 0 0 no-repeat;
+    -webkit-appearance: none;
+    appearance: none;
+    -moz-appearance: none;
+    color: #333333;
+    box-shadow: none;
+    background-color: #ffffff;
+}
+
+.menu_holder {
+    width: 300px;
+    float: right;
+    padding-right: 10px;
+}
+
+#sidenav label {
+    color: #ffffff;
+}
+
+.menu_title {
+    color: #ffffff;
+    font-size: 23px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    font-family: "bebas-neue", Arial, sans-serif;
+}
+
+
+
+.clientCount {
+    color: #ffffff;
+    font-weight: bold;
+}
+
+
+
+#sidenav .row {
+    margin: 0;
+}
+
+#sidenav hr {
+    margin: 10px 0;
+}
+
+
+
+.right-padding {
+    padding-right: 20px;
+}
+
+#close_menu {
+    background-image: url("../images/close-menu.png");
+    width: 25px;
+    height: 25px;
+    float: right;
+    margin: 10px;
+    /*margin-bottom: 10px;*/
+}
+
+#sidenav.openNav {
+    transition: width 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+    width: 310px;
+}
+
+#sidenav.closeNav {
+    transition: width 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+    /*transition:width 0.5s cubic-bezier(0.755, 0.05, 0.855, 0.06);*/
+    width: 0;
+}
+
+.clickBtn {
+    cursor: pointer;
+}
+
+.red {
+    background-color: red;
+}
+
+.blue {
+    background-color: blue;
+}
+
+.green {
+    background-color: green;
+}
+
+.yellow {
+    background-color: yellow;
+}
+
+@keyframes rotate-one {
+    0% {
+        transform: rotateX(35deg) rotateY(-45deg) rotateZ(0deg);
+    }
+    100% {
+        transform: rotateX(35deg) rotateY(-45deg) rotateZ(360deg);
+    }
+}
+
+@keyframes rotate-two {
+    0% {
+        transform: rotateX(50deg) rotateY(10deg) rotateZ(0deg);
+    }
+    100% {
+        transform: rotateX(50deg) rotateY(10deg) rotateZ(360deg);
+    }
+}
+
+@keyframes rotate-three {
+    0% {
+        transform: rotateX(35deg) rotateY(55deg) rotateZ(0deg);
+    }
+    100% {
+        transform: rotateX(35deg) rotateY(55deg) rotateZ(360deg);
+    }
+}
+
+
+/*.tagSection span{
+  display: inline-block;
+  padding: 0 10px;
+}
+
+.tagSection span:hover{
+  background-color: red;
+}
+
+.changable{
+  background-color: #cccccc;
+}
+*/
+
+#loaderDiv {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1100;
+    background-color: white;
+    opacity: .6;
+}
+
+.ajax-loader {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-left: -32px;
+    /* -1 * image width / 2 */
+    margin-top: -32px;
+    /* -1 * image height / 2 */
+    display: block;
+}
+
+[ng\:cloak],
+[ng-cloak],
+[data-ng-cloak],
+[x-ng-cloak],
+.ng-cloak,
+.x-ng-cloak {
+    display: none !important;
+}
+
+@media (min-width: 768px) {
+    /*   table {
+        table-layout: fixed;
+    }
+    table .col-lg-1.tableID {
+        width: 3.333%;
+    }
+    table .col-lg-1.tableDate {
+        width: 11.333%;
+    }*/
+    #sidenav {
+        /*transition:width 0.5s cubic-bezier(0.23, 1, 0.32, 1);*/
+        padding-top: 60px;
+    }
+    #sidenav.openNav {
+        width: 350px;
+    }
+    #data-container {
+        /* padding-left: 15px;
+        padding-right: 15px;*/
+    }
+    .client_names {
+        width: 90%;
+    }
+    .campaign-info {
+        padding: 0 0 0 25px;
+    }
+    .campaign-box {
+        width: 720px
+    }
+    .status-bar,
+    .data-border {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+    
+    .campaign-name {
+        font-size: 16px;
+    }
+    .campaign_tags_block {
+        padding-left: 20px;
+    }
+    .permision-icon,
+    .portfolio-icon {
+        border-right: 2px solid #64717c;
+        border-left: 2px solid #64717c;
+    }
+}
+
+
+/* Medium devices (desktops, 992px and up) */
+
+@media (min-width: 992px) {
+  /*  .short-count {
+        display: none;
+    }*/
+    .client_names {
+        font-size: 28px;
+        line-height: 28px;
+        width: 95%;
+    }
+    .campaign-info {
+        padding: 0 0 0 45px;
+    }
+    .campaign-box {
+        width: 940px
+    }
+    .campaign_tags_block {
+        padding-left: 40px;
+    }
+}
+
+
+/* Large devices (large desktops, 1200px and up) */
+
+@media (min-width: 1200px) {
+    .campaign-box {
+        width: 1140px;
+    }
+}

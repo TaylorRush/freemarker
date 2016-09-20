@@ -1,0 +1,208 @@
+html,
+body {
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    color: #2c3441;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+.fullPage {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background-color: #262e3b;
+    background-image: url("../images/bg-repeat.png");
+    overflow: auto;
+}
+
+
+
+.vertical-center-parent {
+    display: table;
+    table-layout: fixed;
+}
+
+.vertical-center-child {
+    display: table-cell;
+    padding-top: 3px;
+    vertical-align: middle;
+}
+
+.cellTableBg {
+    display: table-cell;
+    background-position: center center;
+    background-repeat: no-repeat;
+    width: 50px;
+}
+
+.tableBorderCollapse {
+    display: table;
+    border-collapse: collapse;
+}
+
+.col-center-h {
+    margin: 0 auto;
+}
+
+.fmlogo {
+    margin: 5px 0;
+}
+
+.top-container {
+    background-color: #0abab5;
+    color: #FFFFFF;
+    padding: 4px 0;
+}
+
+.page-title {
+    color: #27313b;
+    font-family: "bebas-neue", Arial, sans-serif;
+    font-size: 30px;
+}
+
+.data-border {
+    background-color: #e0ebf4;
+    padding: 0;
+    
+}
+
+.no-gutter > [class*='col-'] {
+    padding-right: 0;
+    padding-left: 0;
+}
+
+.row-full{
+    margin: 0
+}
+
+.row-50{
+    height: 50px;
+}
+
+.input-group-addon,
+.form-control,
+.panel-heading,
+.panel-group .panel {
+    border-radius: 0;
+}
+
+
+.btn {
+    font-family: "bebas-neue", Arial, sans-serif;
+    border-radius: 0;
+    font-size: 18px;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.btn-default {
+    background-color: #08bab5;
+    border-color: #08bab5;
+    color: #FFFFFF;
+}
+
+#data-container{
+    padding: 0;
+}
+
+.mobile-bottom-botter {
+    border-bottom: 2px solid #e0ebf4;
+}
+
+.show-desktop-inline {
+    display: none;
+}
+
+.checkBoxFill label {
+    font-size: 11px;
+    line-height: 11px;
+}
+
+.checkBoxFill > input[type="checkbox"] + label::before {
+    background: rgba(0, 0, 0, 0) url("../images/checkboxs.png") no-repeat scroll 0 0px;
+    content: "   ";
+    height: 9px;
+    left: 12px;
+    margin: 1px 0 0 -10px;
+    overflow: hidden;
+    pointer-events: none;
+    position: absolute;
+    width: 9px;
+    z-index: 2;
+    color: #fff;
+}
+
+.checkBoxFill > input[type="checkbox"]:checked + label::before {
+    background-position: 0 -9px;
+}
+
+.checkBoxFill input[type="checkbox"] {
+    opacity: 0;
+    padding: 0;
+    margin: 0;
+}
+
+.checkBoxFill {
+    height: 20px;
+}
+
+.checkBoxFill label {
+    font-weight: 100;
+    color: #ffffff;
+}
+
+select.form-control {
+    font-size: 12px;
+    width: 222px;
+    height: 21px;
+    padding: 1px 10px 1px 5px;
+    border: none;
+    background: url(../images/dropdown.png) 0 0 no-repeat;
+    -webkit-appearance: none;
+    appearance: none;
+    -moz-appearance: none;
+    color: #333333;
+    box-shadow: none;
+    background-color: #ffffff;
+}
+
+.ext-icon{
+    font-size: 12px;
+    text-align: center;
+   /* height: 50px;*/
+}
+.swf-icon{
+    background-color: red;
+    color: white;
+}
+
+.html-icon{
+    background-color: #e44d26;
+    color: white;
+}
+
+@media (min-width: 768px) {
+    .data-border{
+        padding: 15px;
+    }
+
+    .mobile-bottom-botter {
+        border-bottom: 0 none;
+    }
+}
+
+
+/* Medium devices (desktops, 992px and up) */
+
+@media (min-width: 992px) {
+    .show-desktop-inline{
+        display: inline-block;
+    }
+}
+
+
+/* Large devices (large desktops, 1200px and up) */
+
+@media (min-width: 1200px) {}

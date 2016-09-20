@@ -1,0 +1,195 @@
+<div id="edit-campaign-page">
+    <div class="container-fluid icons-container">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="page-title text-center">
+                        {{campaignData.client_name}}
+                    </div>
+                </div>
+                <div class="col-xs-12">
+                    <div class="page-title text-center">
+                       <a href="#/creative_team/edit"> go back </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="data-container" class="container-fluid">
+        <div class="container data-border">
+            <div class="data-content" ng-show="dataDone">
+                <form name="myForm" autocomplete="off">
+                    <div class="row row-full data-section">
+                        <div class="col-xs-12 col-md-6">
+                            <div class="vertical-center-parent twphnx col-center-h">
+                                <div class="form-group vertical-center-child">
+                                    <button class="btn btn-default" ng-disabled="campaignData.tw_id == '0'" ng-click="exitURL('tw', campaignData.tw_id)" type="submit">TeamWork</button>
+                                    <button class="btn btn-default" ng-disabled="campaignData.phnx_id == '0'" ng-click="exitURL('phnx', campaignData.phnx_id)" type="submit">PHNX</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-6 col-md-3">
+                            <div class="form-group">
+                                <label class="control-label" for="campaignPubDate"> Published Date </label>
+                                <input id="campaignPubDate" type="text" class="form-control text-center" disabled ng-model="campaignData.pub_date">
+                            </div>
+                        </div>
+                        <div class="col-xs-6 col-md-3">
+                            <div class="form-group">
+                                <label for="vertical_set"> Vertical </label>
+                                <input id="campaignPubDate" type="text" class="form-control text-center" disabled ng-model="getVertical(campaignData.vertical_id)[0].vertical">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row row-full data-section">
+                        <div class="data-section-title">Names</div>
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label for="campaignServer"> Server Folder Name: </label>
+                                <input id="campaignServer" type="text" class="form-control" disabled ng-model="campaignData.server_name">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="client-name"> Client Name: </label>
+                                <input id="client-name" type="text" class="form-control" ng-model="campaignData.client_name" ng-blur="updateClient()">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="campaignName"> Campaign Name: </label>
+                                <input id="campaignName" type="text" class="form-control" ng-model="campaignData.campaign_name" ng-blur="updateCampaign('campaign_name')">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row row-full data-section">
+                        <div class="data-section-title">TAGS</div>
+                        <div class="col-xs-12 col-sm-8">
+                            <label for="tagCampaign"> Add Tags to Campaign: </label>
+                            <div class="input-group">
+                                <input id="tagCampaign" type="text" class="form-control" ng-model="tagInput" placeholder="add tags separated by commas" bs-options="tag as tag.tag_name for tag in allTags" bs-typeahead type="text">
+                                <div class="input-group-btn">
+                                    <button class="btn btn-default" type="submit" ng-click="addTags(this, campaign.id, tagInput)">Submit</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-4">
+                            <div class="tagSection">
+                                <label for="tagList">Current Tags: </label>
+                                <ul>
+                                    <li ng-repeat="tagString in currentTags track by $index" ng-click="deleteTag(this, tagString, $index)">{{tagString}} </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row row-full data-section">
+                        <div class="data-section-title">OPTIONS</div>
+                        <div class="col-xs-6 col-md-3">
+                            <div class="form-group">
+                                <label for="preview_set"> Set share preview: </label>
+                                <select class="form-control" name="preview_set" id="preview_set" ng-options="o as o for o in setPreview" ng-model="campaignData.preview_rev" ng-blur="updateCampaign('preview_rev')"></select>
+                            </div>
+                        </div>
+                        <div class="col-xs-6 col-md-3">
+                            <div class="form-group">
+                                <label for="sales_set">Share with Sales </label>
+                                <select class="form-control" name="sales_set" id="sales_set" ng-options="idx as choice for (idx, choice) in shareOptions" ng-model="campaignData.sales_view" ng-blur="updateCampaign('sales_view')"></select>
+                            </div>
+                        </div>
+                        <div class="col-xs-6 col-md-3">
+                            <div class="form-group">
+                                <label for="campaignOwner"> Owner </label>
+                                <select class="form-control" name="owner_set" id="campaignOwner" ng-options="o as o for o in ownerOptions" ng-model="campaignData.owner" ng-blur="updateCampaign('owner')"></select>
+                            </div>
+                        </div>
+                        <div class="col-xs-6 col-md-3">
+                            <div class="form-group">
+                                <label for="campaignStatus"> Campaign Status: </label>
+                                <select class="form-control" name="campaignStatus" id="campaignStatus" ng-options="o as o for o in statusOptions" ng-model="campaignData.status" ng-blur="updateCampaign('status')"></select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row row-full data-section">
+                        <div class="data-section-title">Creatives</div>
+                        <div class="col-xs-12">
+                            <div id="creatives-list" class="panel-group" data-allow-multiple="true" role="tablist" aria-multiselectable="true" bs-collapse data-start-collapsed="true">
+                                <div class="panel panel-default" ng-repeat="type in creativesData track by $index">
+                                    <div class="panel-heading" role="tab" bs-collapse-toggle>
+                                        <div class="panel-title">
+                                            <div class="type-name vertical-center-parent">
+                                                <span class="vertical-center-child">
+                                             {{type.type}}
+                                            </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel-collapse" role="tabpanel" bs-collapse-target>
+                                        <div class="panel-body">
+                                            <!-- inner creatives -->
+                                            <div class="panel-group" data-allow-multiple="true" role="tablist" aria-multiselectable="true" bs-collapse data-start-collapsed="true">
+                                                <div class="panel panel-default" ng-repeat="creative in type.items | orderBy: 'name' track by $index" ng-init="setPortfolioInt(creative)">
+                                                    <div class="panel-heading creative-name" role="tab">
+                                                        <div class="panel-title">
+                                                            <div class="row">
+                                                                <div class="col-xs-9">
+                                                                    <div class="row-50 vertical-center-parent">
+                                                                        <span class="cellTableBg ext-icon vertical-center-child" ng-class="{'.swf': ['swf-icon'], '.html': ['html-icon']}[creative.extension]"> {{creative.extension.slice( 1 )}} </span>
+                                                                        <a class="btn vertical-center-child" bs-collapse-toggle>{{creative.size}}</a> {{creative.name}}
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-xs-3">
+                                                                    <div class="row-50 vertical-center-parent">
+                                                                        <div class="checkBoxFill vertical-center-child">
+                                                                            <input id="addPorfolio{{creative.id}}" type="checkbox" ng-true-value="1" ng-false-value="0" ng-model="creative.portfolio" ng-change='checkedPortfolio(creative.id, creative, $index)'>
+                                                                            <label for="addPorfolio{{creative.id}}"> Add to portfolio </label>
+                                                                        </div>
+                                                                    </div>
+                                                                    <!-- <div class="form-group"> -->
+                                                                    <!--                 <div ng-show="creative.portfolio">
+                                                                            <label for="{{creative.name}}"> Portfolio name: </label>
+                                                                            <div class="input-group">
+                                                                                <input type="text" id="{{creative.name}}" class="form-control" ng-model="creative.easy_name" ng-required="creative.portfolio" uib-tooltip="Name required. Click SAVE to update data" tooltip-is-open="!creative.easy_name" tooltip-placement="bottom-left" tooltip-trigger="focus" focus-on-condition="creative.portfolio">
+                                                                                <div class="input-group-btn">
+                                                                                    <button class="btn btn-default" type="submit" ng-click="saveSetPorfolio(creative.id, creative)">Save</button>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div> -->
+                                                                    <!-- </div> -->
+                                                                </div>
+                                                                <div class="col-xs-12">
+                                                                    <div class="row-50 vertical-center-parent">
+                                                                        <div class="vertical-center-child">
+                                                                            <label for="features{{creative.id}}"> Features: </label> {{creative.features.join(", ")}}
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="panel-collapse" role="tabpanel" bs-collapse-target>
+                                                        <div class="panel-body">
+                                                            <div class="row">
+                                                                <div class="col-xs-12">
+                                                                    <div class="form-group">
+                                                                        <label>Previews: </label>
+                                                                        <div ng-repeat="r in creativeExtras[creative.id]['previews'] | orderBy:'rev':reverse=true">
+                                                                            <a target="_blank" href="{{r.fullpath}}">{{r.rev}}</a>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
