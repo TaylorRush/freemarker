@@ -417,3 +417,19 @@ function getCampData($db, $sales_view=true){
     return $res;
 }
 
+function getFullCampaignData($db, $id, $group=false, $features=false, $revisions=false, $versions=false){
+
+	$crvs = getCampaignCreativesFull($db, $id, $group, $features, $revisions, $versions);
+	$tags = getCampaignTags($db, $id, true);
+	$camp = getCampaignID( $db, $id );
+
+	if($camp['status'] == 'success'){
+
+		$camp['data'][0]['creatives'] = $crvs['data'];
+		$camp['data'][0]['tags'] = $tags['data'];
+	}
+
+	return $camp;
+
+}
+

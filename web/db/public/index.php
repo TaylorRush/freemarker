@@ -669,6 +669,19 @@ $app->group( '/api',  function () {
                         return $response;
                     } );
 
+                $this->get( '/campaigns/{id:\d+}/editcampaign', function ( $request, $response, $args ) {
+                        $db = $this->db;
+                        $response = $response->withStatus( 201 );
+                        $group = true;
+                        $features=true;
+                        $revisions=true;
+                        $versions=true;
+
+                        $response = $response->withJson( getFullCampaignData( $db, $args['id'], $group, $features, $revisions, $versions ) );
+                        // $response = $response->withJson( getFullCampaignData( $db, false, false ) );
+                        return $response;
+                    } );
+
                 $this->get( '/sales', function ( $request, $response ) {
                         $db = $this->db;
                         $response = $response->withStatus( 201 );

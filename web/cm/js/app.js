@@ -211,7 +211,7 @@ myApp.config(['$routeProvider', '$httpProvider', function($routeProvider, $httpP
     }).
     when('/campaign/:itemID', {
         templateUrl: 'views/editCampaign.html',
-        controller: 'CampaignEdit'
+        controller: 'CampaignEditController'
     }).
     // when('/project-detail/:itemId', {
     //     templateUrl: 'views/project-detail.html',

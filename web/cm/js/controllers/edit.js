@@ -1,12 +1,6 @@
-mainView.controller('CampaignEdit', ['$scope', '$http', '$window', '$routeParams', '$filter', function($scope, $http, $window, $routeParams, $filter, focus) {
-    // var urlApi = urlApi + '';
-    // var putCampaign = urlApi + 'campaigns/' + $routeParams.itemID;
-    // var putClient = urlApi + 'clients/';
-    // var urlApi + 'creatives/' = urlApi + 'creatives/';
-    // 
-    var previewQT = '';
+mainView.controller('CampaignEditController', ['$scope', '$http', '$window', '$routeParams', '$filter', function($scope, $http, $window, $routeParams, $filter, focus) {
+    var previewQT = 'http://quicktransmit.com/api/campaigns/_previews/index.php?';
     var previewInsta = 'http://instapreview.com/flash_ads/?'
-
     var allHTTPdone = false;
     $scope.dataDone = false;
     // passed campaign ID
@@ -27,66 +21,14 @@ mainView.controller('CampaignEdit', ['$scope', '$http', '$window', '$routeParams
     $scope.creativesDataBackup = [];
     $scope.creativesData = [];
     $scope.setPreview = [];
-    // $scope.setPreviewSelected = {};
     $scope.currentTags = [];
-    $scope.tagInput = undefined;
-
+    $scope.tagInput = '';
     $scope.creativeExtras = {};
-    // $scope.porfolio = false;
-    // $scope.toolTip = false;
-    // 
 
 
     $http.get(urlApi + 'extras/verticals')
         .then(function(response, status, headers, config) {
             $scope.verticalOptions = response.data.data;
-        });
-
-    // $http.get(urlApi + 'clients')
-    //     .then(function(response, status, headers, config) {
-    //         $scope.allClientNames = response.data.data;
-    //     });
-
-    // GET campaign data by ID
-    $http.get(urlApi + 'campaigns/' + $routeParams.itemID)
-        .then(function(response, status, headers, config) {
-            if (response.data['status'] == 'success') {
-                $scope.campaignData = response.data.data[0];
-                angular.copy(response.data.data[0], $scope.campaignDataBackup);
-            }
-        });
-
-
-    // GET previews for campaign
-    $http.get(urlApi + 'campaigns/' + $routeParams.itemID + '/previews')
-        .then(function(response, status, headers, config) {
-
-            if (response.data['status'] == 'success') {
-                angular.forEach(response.data.data, function(value) {
-                    $scope.setPreview.push(value['rev']);
-                });
-
-                if ($scope.campaignData['preview_rev'] == null || $scope.campaignData['preview_rev'] == 0) {
-                    $scope.campaignData.preview_rev = $scope.setPreview[$scope.setPreview.length - 1];
-                }
-            }
-
-        });
-
-    // GET creatives for campaign
-    $http.get(urlApi + 'campaigns/' + $routeParams.itemID + '/creatives/full')
-        .then(function(response, status, headers, config) {
-            if (response.data['status'] == 'success') {
-                $scope.creativesData = response.data.data;
-                angular.copy(response.data.data, $scope.creativesDataBackup);
-
-                populateFeatures();
-                // if ($scope.campaignData['preview_rev'] == null || $scope.campaignData['preview_rev'] == 0) {
-                //     $scope.campaignData.preview_rev = $scope.setPreview[$scope.setPreview.length - 1];
-                // }
-                // console.log($scope.creativesData);
-                $scope.dataDone = true;
-            }
         });
 
     $http.get(urlApi + 'extras/tags')
@@ -104,24 +46,20 @@ mainView.controller('CampaignEdit', ['$scope', '$http', '$window', '$routeParams
 
         });
 
-    // GET tags for campaign
-    $http.get(urlApi + 'campaigns/' + $routeParams.itemID + '/tags')
+    $http.get(urlApi + 'cm/campaigns/' + $routeParams.itemID + '/editcampaign')
         .then(function(response, status, headers, config) {
-
             if (response.data['status'] == 'success') {
-                var temp = [];
-                angular.forEach(response.data.data, function(value) {
-                    temp.push(value.tag_name);
-                });
 
-                $scope.currentTags = temp
+                $scope.campaignData = response.data.data[0];
+                angular.copy(response.data.data[0], $scope.campaignDataBackup);
+
+                $scope.creativesData = response.data.data[0].creatives;
+                $scope.currentTags = response.data.data[0].tags;
+
+                populateFeatures();
+                $scope.dataDone = true;
             }
-
         });
-
-
-
-
 
 
     $scope.exitURL = function(page, link) {
@@ -132,7 +70,7 @@ mainView.controller('CampaignEdit', ['$scope', '$http', '$window', '$routeParams
         }
     }
 
-    $scope.getVertical = function(vID){
+    $scope.getVertical = function(vID) {
         return found = $filter('filter')($scope.verticalOptions, { 'id': vID }, true);
     }
 
@@ -143,16 +81,16 @@ mainView.controller('CampaignEdit', ['$scope', '$http', '$window', '$routeParams
         } else {
             data[key] = $scope.campaignData[key];
         }
-        console.log(data)
-        if($scope.campaignData[key] != $scope.campaignDataBackup[key]){
+        // console.log(data)
+        if ($scope.campaignData[key] != $scope.campaignDataBackup[key]) {
             $http.put(urlApi + 'campaigns/' + $routeParams.itemID, data)
-            .then(function(response, status, headers, config) {
-                console.log(response.data);
-                $scope.campaignDataBackup[key] = $scope.campaignData[key];
-            });
+                .then(function(response, status, headers, config) {
+                    console.log(response.data);
+                    $scope.campaignDataBackup[key] = $scope.campaignData[key];
+                });
         }
 
-       
+
     }
 
 
@@ -160,10 +98,9 @@ mainView.controller('CampaignEdit', ['$scope', '$http', '$window', '$routeParams
         if ($scope.campaignData.client_name != $scope.campaignDataBackup.client_name) {
             var passData = {};
             passData['client_name'] = $scope.campaignData.client_name;
-            console.log(passData);
+            // console.log(passData);
             $http.put(urlApi + 'clients/' + $scope.campaignDataBackup.client_id, passData)
                 .then(function(response, status, headers, config) {
-                    console.log(config)
                     console.log(response.data);
                     $scope.campaignDataBackup.client_name = $scope.campaignData.client_name;
                 });
@@ -207,7 +144,7 @@ mainView.controller('CampaignEdit', ['$scope', '$http', '$window', '$routeParams
         $http.post(postTagsURL, sendTags)
             .then(function(response, status, headers, config) {
                 var addedTags = response.data.data['success'];
-                var temp = [];
+                // var temp = [];
                 angular.forEach(addedTags, function(value) {
                     $scope.currentTags.push(value);
                 });
@@ -229,20 +166,6 @@ mainView.controller('CampaignEdit', ['$scope', '$http', '$window', '$routeParams
             });
     }
 
-    // $scope.saveSetPorfolio = function(id, obj) {
-    //     obj['submited'] = true;
-    //     var data = {};
-    //     if (!obj['easy_name']) {
-    //         return false;
-    //     }
-    //     // data['easy_name'] = obj['easy_name'];
-    //     data['portfolio'] = obj['portfolio'];
-
-    //     $http.put(urlApi + 'creatives/' + id, data)
-    //         .then(function(response, status, headers, config) {
-    //             console.log(response.data);
-    //         });
-    // };
 
     $scope.checkedPortfolio = function(id, obj, i) {
         if (obj.portfolio != obj.portfolio_init) {
@@ -263,35 +186,21 @@ mainView.controller('CampaignEdit', ['$scope', '$http', '$window', '$routeParams
     }
 
 
-
-    
-
-    // $scope.updatePorfolio = function() {
-    //     console.log('saving');
-    // }
-
-    // $scope.inputField = function() {
-    //     // var valid = ($scope.creativeExtras[id]['easy_name'].length > 0) ? false : true;
-    //     // console.log($scope.creativeExtras[id]);
-    //     // return valid;
-    //     console.log('test');
-    // }
-
-    // $scope.$watch("creativeExtras[1068]['easy_name']", function(newValue, oldValue) {
-    //     console.log(newValue);
-    // }, true);
-
-    // $scope.$watch("creativesData", function(newValue) {
-    //    console.log(newValue)
-    // }, true);
-    // 
-    //   $scope.$on('$viewContentLoaded', function(){
-    //       console.log('all loaded');
-    // });
-    // 
     function populateFeatures() {
+
+        // var flashBase = 
+        // 'I am an <code>HTML</code>string with ' +
+        // '<a href="#">links!</a> and other <em>stuff</em>';
+        // $scope.campaignData
+        // 
+        var typeMap = {
+            "Standard": "Std",
+            "RichMedia": "RM",
+            "Static": "Static"
+        }
+
         angular.forEach($scope.creativesData, function(group) {
-            //console.log(group.type)
+            // console.log(group.type)
 
             angular.forEach(group.items, function(crv) {
                 if (!$scope.creativeExtras.hasOwnProperty(crv.id)) {
@@ -307,18 +216,36 @@ mainView.controller('CampaignEdit', ['$scope', '$http', '$window', '$routeParams
                 }
 
                 if (crv.hasOwnProperty('previews')) {
-                    angular.forEach(crv.previews, function(p) { 
+                    angular.forEach(crv.previews, function(p) {
+
+                        if ($scope.setPreview.indexOf(p['rev']) == -1) {
+                            $scope.setPreview.push(p['rev']);
+                        }
                         var serverParts = p['url_path'].split('/');
-                        p['fullpath'] = (p['server'] == 'instapreview') ? previewInsta +'client='+serverParts[0]+'&proj='+serverParts[1]+'&revision='+p['rev']+'&size='+crv.size+'&name='+crv.name : '';
-                        console.log(p)
+                        var rootpart = 'client=' + serverParts[0] + '&proj=' + serverParts[1] + '&revision=' + p['rev'];
+
+                        p['fullpath'] = (p['server'] == 'instapreview') ? previewInsta + rootpart + '&size=' + crv.size + '&name=' + crv.name : previewQT + rootpart + '&size=' + crv.size + '&name=' + crv.name + '&type=' + typeMap[group.type];
+                        // p['direct_url'] = (p['server'] == 'instapreview') ? previewInsta
+                        // console.log(p)
+                        // http://quicktransmit.com/api/campaigns/_previews/index.php?client=ACEMoldOnly&proj=ACEMoldOnly_16-0330&revision=3
                         $scope.creativeExtras[crv.id].previews.push(p);
                     });
                 }
 
+                // angular.forEach(response.data.data, function(value) {
+
+                // });
+
 
             });
         });
+
+
+        if ($scope.campaignData['preview_rev'] == null || $scope.campaignData['preview_rev'] == 0) {
+            $scope.campaignData.preview_rev = $scope.setPreview[$scope.setPreview.length - 1];
+        }
         $scope.allDone = true;
+
     }
 
     // $scope.$on("db_end", function() {
