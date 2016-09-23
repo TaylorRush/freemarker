@@ -172,11 +172,14 @@
                                                                 <div class="col-xs-12">
                                                                     <div class="form-group">
                                                                         <label>Previews: </label>
-                                                                        <div ng-repeat="r in creativeExtras[creative.id]['previews'] | orderBy:'rev':reverse=true">
-                                                                            <a target="_blank" href="{{r.fullpath}}">{{r.rev}}</a>
-                                                                        </div>
+                                                              
+                                                                                 <select class="form-control" name="preview-link-{{creative.id}}" id="preview-link-{{creative.id}}" ng-options="item as item.rev for item in creativeExtras[creative.id]['previews'] track by item.rev" ng-model="creativeExtras[creative.id].view_preview" ng-change="changePreviewLink(r.preview_link)">
+                                                                                      <option value="">-- Select Revision --</option>
+                                                                                 </select>
+                                                                     
                                                                     </div>
                                                                 </div>
+                                                            
                                                             </div>
                                                         </div>
                                                     </div>

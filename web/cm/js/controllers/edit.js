@@ -1,6 +1,8 @@
 mainView.controller('CampaignEditController', ['$scope', '$http', '$window', '$routeParams', '$filter', function($scope, $http, $window, $routeParams, $filter, focus) {
     var previewQT = 'http://quicktransmit.com/api/campaigns/_previews/index.php?';
-    var previewInsta = 'http://instapreview.com/flash_ads/?'
+    var previewInsta = 'http://instapreview.com/flash_ads/?';
+    var fileInsta = 'http://instapreview.com/design/';
+    var fileQT = 'http://quicktransmit.com/api/campaigns/_previews/';
     var allHTTPdone = false;
     $scope.dataDone = false;
     // passed campaign ID
@@ -185,6 +187,11 @@ mainView.controller('CampaignEditController', ['$scope', '$http', '$window', '$r
         val.portfolio_init = val.portfolio;
     }
 
+    $scope.changePreviewLink = function(id){
+
+        console.log(id);
+    }
+
 
     function populateFeatures() {
 
@@ -200,13 +207,14 @@ mainView.controller('CampaignEditController', ['$scope', '$http', '$window', '$r
         }
 
         angular.forEach($scope.creativesData, function(group) {
-            // console.log(group.type)
-
             angular.forEach(group.items, function(crv) {
                 if (!$scope.creativeExtras.hasOwnProperty(crv.id)) {
                     $scope.creativeExtras[crv.id] = {};
                     $scope.creativeExtras[crv.id]['features'] = [];
                     $scope.creativeExtras[crv.id]['previews'] = [];
+                    $scope.creativeExtras[crv.id]['view_preview'] = '';
+                    $scope.creativeExtras[crv.id]['active_url'] = '';
+
                 }
 
                 if (crv.hasOwnProperty('features')) {
@@ -218,49 +226,35 @@ mainView.controller('CampaignEditController', ['$scope', '$http', '$window', '$r
                 if (crv.hasOwnProperty('previews')) {
                     angular.forEach(crv.previews, function(p) {
 
-                        if ($scope.setPreview.indexOf(p['rev']) == -1) {
-                            $scope.setPreview.push(p['rev']);
+                        var intRev = parseInt(p['rev']);
+                        if ($scope.setPreview.indexOf(intRev) == -1) {
+                            $scope.setPreview.push(intRev);
                         }
                         var serverParts = p['url_path'].split('/');
                         var rootpart = 'client=' + serverParts[0] + '&proj=' + serverParts[1] + '&revision=' + p['rev'];
 
-                        p['fullpath'] = (p['server'] == 'instapreview') ? previewInsta + rootpart + '&size=' + crv.size + '&name=' + crv.name : previewQT + rootpart + '&size=' + crv.size + '&name=' + crv.name + '&type=' + typeMap[group.type];
-                        // p['direct_url'] = (p['server'] == 'instapreview') ? previewInsta
-                        // console.log(p)
-                        // http://quicktransmit.com/api/campaigns/_previews/index.php?client=ACEMoldOnly&proj=ACEMoldOnly_16-0330&revision=3
+                        p['preview_link'] = (p['server'] == 'instapreview') ? previewInsta + rootpart + '&size=' + crv.size + '&name=' + crv.name : previewQT + rootpart + '&size=' + crv.size + '&tname=' + crv.name + '&type=' + typeMap[group.type];
+                        p['file_path'] = (p['server'] == 'instapreview') ? fileInsta + p['url_path'] : fileQT + p['url_path'];
+                        p['rev'] = parseInt(p['rev']);
                         $scope.creativeExtras[crv.id].previews.push(p);
+
                     });
                 }
 
-                // angular.forEach(response.data.data, function(value) {
-
-                // });
-
-
             });
         });
+
+        $scope.setPreview = $filter('orderBy')($scope.setPreview, null, true)
+        $scope.campaignData.preview_rev = parseInt($scope.campaignData.preview_rev);
 
 
         if ($scope.campaignData['preview_rev'] == null || $scope.campaignData['preview_rev'] == 0) {
             $scope.campaignData.preview_rev = $scope.setPreview[$scope.setPreview.length - 1];
         }
         $scope.allDone = true;
-
+         console.log($scope.creativeExtras)
     }
 
-    // $scope.$on("db_end", function() {
-    //     console.log('db_end');
-    //     if (!allHTTPdone) {
-    //         console.log('all loaded');
-    //         allHTTPdone = true;
-    //         $scope.populateFeatures();
-    //         if ($scope.campaignData['preview_rev'] == null || $scope.campaignData['preview_rev'] == 0) {
-    //             $scope.campaignData.preview_rev = $scope.setPreview[$scope.setPreview.length - 1];
-    //         }
-    //         console.log($scope.creativesData);
-    //         $scope.dataDone = true;
-    //     }
 
-    // });
 
 }]);

@@ -1,4 +1,4 @@
-// var myApp = angular.module('creativeManagement', ['ngRoute', 'projectsControllers', 'angular.filter', 'ui.bootstrap', 'propFilters']);
+// var myApp = angular.module('creativeManagement', ['ngAnimate', 'ngRoute', 'checklist-model', 'mainView', 'ui.bootstrap', 'angular.filter']); 
 var myApp = angular.module('creativeManagement', ['ngAnimate', 'ngRoute', 'checklist-model', 'mainView', 'mgcrea.ngStrap', 'angular.filter']);
 var urlApi="http://localhost:8888/db/public/api/"
 // var urlApi="http://fm.chacon.mx/db/public/api/"
